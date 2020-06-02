@@ -27,4 +27,9 @@ public class Putter : MonoBehaviour
             transform.RotateAround(this.origin.transform.position, -1*this.origin.transform.up, rotateSpeed * Time.deltaTime);
         }
     }
+
+    public Vector3 GetRotation()
+    {
+        return -1*transform.up;
+    }
 }

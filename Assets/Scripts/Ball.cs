@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class Ball : MonoBehaviour
 {
     private Helper.BallState currentState;
@@ -25,8 +25,7 @@ public class Ball : MonoBehaviour
             {
                 ResetForce();
                 currentState = Helper.BallState.Stationary;
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
+                
             }
         }
     }
@@ -39,6 +38,7 @@ public class Ball : MonoBehaviour
 
     public void Swing(Vector3 rotation, float thrust)
     {
+        currentState = Helper.BallState.Swinging;
         StartCoroutine(WaitAndSwing(0.6f, rotation, thrust));
     }
 

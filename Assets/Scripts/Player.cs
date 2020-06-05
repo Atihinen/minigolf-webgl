@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private GameObject ball;
-    private readonly string ballTag = "Ball";
+    
     private GameObject putter;
     private readonly string putterTag = "Putter";
     private Putter putterInstance;
@@ -14,11 +14,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ball = GameObject.FindWithTag(ballTag);
+        ball = GameObject.FindWithTag(Helper.ballTag);
         ballInstance = ball.GetComponent<Ball>();
         putter = GameObject.FindWithTag(putterTag);
         putterInstance = putter.GetComponent<Putter>();
-
     }
 
     // Update is called once per frame
@@ -30,6 +29,10 @@ public class Player : MonoBehaviour
             {
                 ballInstance.Swing(putterInstance.GetRotation(), thurst);
             }
+        }
+        else if (ballInstance.getState().Equals(Helper.BallState.Stationary))
+        {
+            putterInstance.MovePutter(ball.transform.position);
         }
     }
 }

@@ -6,13 +6,12 @@ public class Putter : MonoBehaviour
 {
     private GameObject origin;
     private readonly string originName = "Origin";
-    private float originRotation;
     private float rotateSpeed = 25f;
+    private Vector3 distance;
     // Start is called before the first frame update
     void Start()
     {
         this.origin = GameObject.Find(originName);
-        this.originRotation = this.origin.transform.eulerAngles.y;
     }
 
     // Update is called once per frame
@@ -26,5 +25,16 @@ public class Putter : MonoBehaviour
         {
             transform.RotateAround(this.origin.transform.position, -1*this.origin.transform.up, rotateSpeed * Time.deltaTime);
         }
+    }
+
+    public Vector3 GetRotation()
+    {
+        return -1*transform.up;
+    }
+
+    public void MovePutter(Vector3 position)
+    {
+        distance = position - origin.transform.position;
+        transform.position += distance;
     }
 }
